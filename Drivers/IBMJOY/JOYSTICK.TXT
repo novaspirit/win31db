@@ -1,0 +1,44 @@
+PLEASE READ
+-------------------------------------------------
+By using the following Windows 3.1 Driver Library
+(the "Software"), you are hereby agreeing to the
+included license agreement.  Please review the
+file LICENSE.TXT.
+
+Installing the Joystick Driver
+----------------------------
+Follow the instructions given in "Installing a 
+Driver Not Supplied with Windows," in Chapter 5,
+"Control Panel," in the "Microsoft Windows User's
+Guide." When you are requested to insert the disk
+containing the setup information, insert the disk
+you made during the downloading procedure, or
+type the path of the directory where you
+downloaded the driver.
+
+Installation note:
+--------------------
+When the IBM Joystick Driver is installed or removed via the
+Control Panel Drivers applet, Windows needs to be restarted
+before the driver installation/removal is recognized by the
+Control Panel.
+
+If Windows is not restarted whenever the Joystick driver is
+installed, an information panel indicating "No Joystick Driver
+is Installed" shows up when the Joystick applet is invoked.
+
+Joystick Applet
+---------------
+The joystick applet is a utility for calibrating the joystick.
+Copy the the joystick applet (joystick.cpl) to the
+Windows system subdirectory.  This will cause Windows to
+create a corresponding joystick icon in Control Panel.
+
+Joystick Performance
+--------------------
+The Joystick driver may not produce precise results
+on all computer systems.  The performance of the
+joystick driver is largely dependent upon the device
+itself.  Microsoft does not guarantee that the joystick
+driver will work with all computer systems and/or joystick
+devices.

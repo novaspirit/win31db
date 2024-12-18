@@ -1,0 +1,207 @@
+COMMON QUESTIONS & ANSWERS
+==========================
+
+This file contains answers to some commonly-asked questions.  
+Please go through all the sections below when you encounter 
+a problem before calling Technical Support.
+
+This file contains the following sections:
+
+   1. Installing Windows 3.1 drivers for the audio hardware
+      1.1 Setup Windows 3.1 drivers again
+      1.2 Using DRIVER applet in Control Panel (OEMSETUP.INF)
+      1.3 General
+
+   2. DOS drivers
+      2.1 Uses of the DOS drivers
+      2.2 Bypass loading the DOS drivers
+
+   3. General
+      3.1 Audio sources setting
+      3.2 Playback digitized sound smoothly
+      3.3 Error message appears when winsetup.exe runs
+
+   4. GAMEPORT
+	
+1. INSTALLING WINDOWS 3.1 DRIVERS FOR
+
+   1.1 SETUP WINDOWS 3.1 DRIVERS AGAIN
+
+   Q1. How can I setup my Windows 3.1 drivers again.
+
+   A1. You may setup Windows 3.1 drivers again by running INSTALL 
+       from your audio software directory at the DOS prompt.  Select 
+       "Setup Windows" and follow the instructions on the screen to 
+       complete the setup.
+
+
+   1.2 USING DRIVER APPLET IN CONTROL PANEL (OEMSETUP.INF)
+
+   Q1. My drivers are not installed when I use the driver applet 
+       in Control Panel to add the drivers.  What do I do?
+
+   A1. Before you choose to add any audio software drivers, 
+       you should first remove all the existing audio drivers 
+       shown in the "Installed Drivers List" and then restart 
+       Windows. Chances are existing versions of audio drivers 
+       are installed when you start-up Windows and cannot be 
+       over-written. You must also restart Windows after adding 
+       all the drivers for these new drivers to take effect.  
+       Refer to your Windows User Reference Manual for more detail 
+       on the Driver applet.
+
+
+   1.3 GENERAL
+
+   Q1. No matter what I try, I can't get sound in Windows.  What
+       should I do to fix it?
+
+   A1. Here are some points you can check:
+
+   a. If you installed Windows 3.1 using the "Express Installation",
+      Windows scanned your hard disk for programs to be installed. 
+      As a result, older versions of the audio software applications 
+      may have been installed if they were on your hard disk at the 
+      time of installation.  Please remove these icons.  To do this, 
+      click on the icon once to select it, then press the delete key.
+      Windows will ask you for confirmation.  Repeat the above
+      procedure for each icon.
+
+   b. Open the Driver applet in Control panel.  You should at least
+      have the following driver names in the Installed Drivers list:
+
+        Creative SB16 Wave/Aux/Mixer/MidiPort Driver
+        Creative Stereo Music Synthesizer Driver
+        MIDI Mapper
+        Timer
+        [MCI] CD Audio    ;this is only for owners of CD-ROM drives
+        [MCI] MIDI Sequencer
+        [MCI] Sound
+
+      If one or more of the drivers do not exist, you must install the
+      driver(s) using the Driver applet in Control Panel (See your
+      Windows manual for more details).
+
+   c. Check your SYSTEM.INI by choosing RUN from the File menu of the
+      Program Manager and typing NOTEPAD SYSTEM.INI in the command
+      line box.  Examine the [Boot], [drivers] and [sndblst.drv] 
+      sections. They should look something like this:
+
+        [Boot]
+        drivers=mmsystem.dll msmixmgr.dll
+
+        [drivers]
+        Timer=timer.drv
+        Midimapper=midimap.drv
+        Aux=sb16snd.drv
+        MIDI=sb16fm.drv
+        Wave=sb16snd.drv
+        MIDI1=sb16snd.drv
+        Mixer=sb16snd.drv
+
+        [sndblst.drv]
+        port=220
+        int=5
+        dmachannel=1
+        hdmachannel=5
+        MIDIport=330
+      
+
+   d. If Windows refuses to install a device driver or if you get the
+      error message "Device not found" when playing a Wave or MIDI
+      file, or a CD, be sure that you have the following settings in
+      the [mci] section of SYSTEM.INI.
+
+        [mci]
+        WaveAudio=mciwave.drv
+        Sequencer=mciseq.drv
+        CDAudio=mcicda.drv; this is only for owners of CD-ROM drives
+
+      If one or more of the drivers do not exist, you must install 
+      the driver(s) using the Driver applet in Control Panel (See 
+      your Windows manual for instructions).  Do not type in the 
+      entries into the SYSTEM.INI because the files have to be 
+      expanded and installed into your SYSTEM directory by Windows.
+
+
+2. DOS DRIVERS
+
+   2.1 BYPASS LOADING THE DOS DRIVERS
+
+   Q1. I do not wish to load the DOS drivers CTSB16.SYS and
+       CTMMSYS.SYS at system startup.  What should I do?
+
+   A1. To bypass the loading of the DOS drivers CTSB16.SYS and
+       CTMMSYS.SYS, press the ALT key during system starts up.
+
+       Or, you can use a text editor to REM the following lines in
+       your CONFIG.SYS file.  These lines load the DOS drivers at
+       system startup.
+
+       DEVICE=C:\SB16\DRV\CTSB16.SYS /UNIT=0 /BLASTER=A:220 I:5 D:1 H:5 P:330
+       DEVICE=C:\SB16\DRV\CTMMSYS.SYS
+
+
+3. GENERAL
+
+   3.1 AUDIO SOURCE SETTINGS
+
+   Q1. I can't hear anything from the speakers, but when I run the
+       diagnostic program, it sounds okay.  What do I do?
+
+   A1. Check the mixer settings for the various sources.  Use the
+       programs SB16SET.EXE in DOS or CTMIXER.EXE in Windows to 
+       adjust the settings to a higher level.
+
+
+   3.2 ELIMINATING JERKY DIGITIZED SOUND PLAYBACK 
+
+   Q1. The playback sounds jerky.  Is my card defective ?
+
+   A1. If you are in Windows, this may be due to your choice 
+       of Windows swap file.  Temporary swap file tends to be 
+       fragmented causing jerky playback.  If possible, use a 
+       permanent swap file to eliminate this problem.  Refer to 
+       your Windows manual for instructions on creating a permanent 
+       swap file.
+
+       Loading a disk cache program such as SMARTDRV will also
+       eliminate this problem.  To load SMARTDRV, refer to your DOS or
+       Windows manual for instructions.
+
+
+   3.3 ERROR MESSAGE APPEARS WHEN WINSETUP.EXE RUNS
+
+   Q1. When I start Windows and WINSETUP runs, it gives me a dialog
+       box saying it can't find the environment.
+
+   A1. The BLASTER environment is not set or is incorrectly set.  
+       This program requires that your BLASTER environment is set 
+       correctly and tallies with your audio hardware.  You can 
+       type "SET" at DOS prompt to check the environment settings.  
+       For more details on the BLASTER environment, refer to your 
+       Getting Started manual.
+
+
+4. GAMEPORT
+
+   Q1. How do I disable the GamePort?
+
+   A1. There are a few ways for you to enable or disable the GamePort.
+       This depends on the type of audio card you have.
+
+       a. Non Plug and Play card
+          To enable or disable GamePort, you need to set the appropriate
+          jumper.  Please refer to your Getting Started manual for the
+          location of the jumper.  If your audio card does not have the 
+          GamePort enable or disable jumper, you can use GAMEPORT.EXE
+          utility to enable or disable the GamePort.  You may not have
+          the GAMEPORT.EXE if your audio card does not support GamePort
+          software enable or disable.
+
+       b. Plug and Play card
+          For Plug and Play card, you need to use the BIOS setup or the
+          ISA Configuration utility to enable or disable the GamePort.
+
+
+         *********  End of CQA.TXT  *********
